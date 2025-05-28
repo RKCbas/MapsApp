@@ -1,6 +1,10 @@
 # MapsApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6. and for the styles used [Tailwind](https://tailwindcss.com/docs/installation/framework-guides) and for the templates components themes and layouts used [daisy UI](https://daisyui.com/docs/install/) and for the icons used [Iconify](https://icon-sets.iconify.design).
+Example deployed at:
+
+<!-- !pending -->
+- Pending
 
 ## Development server
 
