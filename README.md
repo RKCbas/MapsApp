@@ -9,8 +9,18 @@ Example deployed at:
 ## Initialize the project
 
 1. Clone the repository
-2. npm i
-3. generate the .env from the .env.template
+2. install the node dependencies:
+
+   ```bash
+   npm i
+   ```
+
+3. generate the `.env` from the ``env.template`
+4. Run the script to generate the environments:
+
+  ```bash
+    npm run set-envs
+  ```
 
 ## Development server
 
