@@ -65,6 +65,7 @@ export default class FullscreenMapPageComponent implements AfterViewInit {
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
       center: [lng, lat], // starting position [lng, lat]
       zoom: this.zoom(), // starting zoom
+
     });
 
     this.mapListeners(map)
@@ -81,6 +82,14 @@ export default class FullscreenMapPageComponent implements AfterViewInit {
       const center = map.getCenter();
       this.coordinates.set(center);
     })
+
+    // map.on('load', ()=>{
+    //   console.log('Map loaded')
+    // })
+
+    map.addControl( new mapboxgl.FullscreenControl() )
+    map.addControl( new mapboxgl.NavigationControl() )
+    map.addControl( new mapboxgl.ScaleControl() )
 
     this.map.set(map);
   }
