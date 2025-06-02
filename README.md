@@ -4,7 +4,13 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 Example deployed at:
 
 <!-- !pending -->
-- Pending
+- Because it uses a service that after some usage it will charge me I did not deployed it.
+
+## Initialize the project
+
+1. Clone the repository
+2. npm i
+3. generate the .env from the .env.template
 
 ## Development server
 
