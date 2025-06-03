@@ -1,3 +1,45 @@
-<div #map class="h-[calc(100vh-64px)]">
+<div #map class="h-[calc(100vh-64px)]"></div>
 
-</div>
+<section class="fixed w-[260px] bg-white rounded top-20 left-10 p-4 pt-3">
+  <h2 class="text-xl font-bold text-black mb-2">Marcadores</h2>
+
+  <div class="flex flex-col gap-2 overflow-y-auto max-h-[60vh]">
+    @for (marker of markers(); track marker.id) {
+    <div
+      class="form-control w-full"
+      (click)="flyToMarker(marker.mapboxMarker._lngLat)"
+    >
+      <label class="label cursor-pointer flex items-center gap-2">
+        <span
+          class="label-text text-gray-800 text-xs break-words whitespace-normal overflow-hidden"
+        >
+          {{ marker.mapboxMarker.getLngLat() | json }}
+        </span>
+        <input
+          title="Marcador"
+          type="radio"
+          name="radio-12"
+          [checked]="true"
+          class="radio"
+          [style]="{ backgroundColor: marker.mapboxMarker._color }"
+          [ngStyle]="{
+            backgroundColor:
+              selectedMarker() === marker.id
+                ? darkenColor(marker.mapboxMarker._color, 25)
+                : marker.mapboxMarker._color,
+            borderColor:
+              selectedMarker() === marker.id
+                ? darkenColor(marker.mapboxMarker._color, 25)
+                : marker.mapboxMarker._color
+          }"
+          (change)="selectedMarker.set(marker.id)"
+        />
+      </label>
+    </div>
+    } @empty {
+    <div class="flex justify-center items-center bg-blue-100 rounded py-3">
+      <p class="text-xs text-secondary">No hay marcadores</p>
+    </div>
+    }
+  </div>
+</section>

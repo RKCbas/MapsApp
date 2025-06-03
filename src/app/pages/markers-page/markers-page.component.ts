@@ -1,7 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, signal, viewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import mapboxgl, { MapMouseEvent } from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import mapboxgl, { LngLatLike, MapMouseEvent } from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { v4 as UUIDv4 } from 'uuid'
+import { JsonPipe, NgStyle } from '@angular/common';
 
 mapboxgl.accessToken = environment.mapboxKey;
 
@@ -12,11 +13,17 @@ interface Marker {
 
 @Component({
   selector: 'app-markers-page',
-  imports: [],
+  imports: [
+    JsonPipe,
+    NgStyle
+  ],
   templateUrl: './markers-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class MarkersPageComponent implements AfterViewInit {
+
+  selectedMarker = signal('')
+
   divElement = viewChild<ElementRef>('map')
   map = signal<mapboxgl.Map | null>(null)
   markers = signal<Marker[]>([])
@@ -85,6 +92,29 @@ export default class MarkersPageComponent implements AfterViewInit {
 
     // console.log(this.markers())
 
+  }
+
+  flyToMarker( lngLan: LngLatLike){
+    if(!this.map()) return;
+
+    this.map()?.flyTo({
+      center: lngLan
+    })
+
+  }
+
+  darkenColor(hex: string, percent: number): string {
+    const num = parseInt(hex.replace('#', ''), 16);
+    const amt = Math.round(2.55 * percent);
+    const R = (num >> 16) - amt;
+    const G = ((num >> 8) & 0x00FF) - amt;
+    const B = (num & 0x0000FF) - amt;
+    return '#' + (
+      0x1000000 +
+      (Math.max(0, R) << 16) +
+      (Math.max(0, G) << 8) +
+      Math.max(0, B)
+    ).toString(16).slice(1);
   }
 
 }
