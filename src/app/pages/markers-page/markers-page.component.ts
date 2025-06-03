@@ -94,13 +94,22 @@ export default class MarkersPageComponent implements AfterViewInit {
 
   }
 
-  flyToMarker( lngLan: LngLatLike){
-    if(!this.map()) return;
+  flyToMarker(lngLan: LngLatLike) {
+    if (!this.map()) return;
 
     this.map()?.flyTo({
       center: lngLan
     })
 
+  }
+
+  deleteMarker(marker: Marker) {
+    if (!this.map()) return;
+    const map = this.map()!;
+
+    marker.mapboxMarker.remove();
+
+    this.markers.update((markers) => markers.filter((m) => m.id !== marker.id))
   }
 
   darkenColor(hex: string, percent: number): string {

@@ -7,13 +7,15 @@
     @for (marker of markers(); track marker.id) {
     <div
       class="form-control w-full"
+      title="Double click to delete"
       (click)="flyToMarker(marker.mapboxMarker._lngLat)"
+      (dblclick)="deleteMarker(marker)"
     >
-      <label class="label cursor-pointer flex items-center gap-2">
+      <label class="label cursor-pointer flex justify-between items-center gap-2">
         <span
           class="label-text text-gray-800 text-xs break-words whitespace-normal overflow-hidden"
         >
-          {{ marker.mapboxMarker.getLngLat() | json }}
+        <pre>{{ marker.mapboxMarker.getLngLat() | json }}</pre>
         </span>
         <input
           title="Marcador"
