@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, effect, ElementRef, signal, viewChild } from '@angular/core';
-import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { environment } from '../../../environments/environment';
 import { DecimalPipe, JsonPipe } from '@angular/common';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 
 mapboxgl.accessToken = environment.mapboxKey;
 
@@ -36,14 +36,15 @@ export default class FullscreenMapPageComponent implements AfterViewInit {
 
   divElement = viewChild<ElementRef>('map')
   map = signal<mapboxgl.Map | null>(null)
+
   zoom = signal(14);
   coordinates = signal({
     lng: -74.5,
     lat: 40
   })
 
-  zoomEffect = effect(()=>{
-    if( !this.map() ) return
+  zoomEffect = effect(() => {
+    if (!this.map()) return
 
     this.map()?.zoomTo(this.zoom())
 
@@ -58,7 +59,7 @@ export default class FullscreenMapPageComponent implements AfterViewInit {
     const element = this.divElement()?.nativeElement;
     console.log(element);
 
-    const {lat, lng} = this.coordinates();
+    const { lat, lng } = this.coordinates();
 
     const map = new mapboxgl.Map({
       container: element, // container ID
@@ -68,17 +69,18 @@ export default class FullscreenMapPageComponent implements AfterViewInit {
 
     });
 
+
     this.mapListeners(map)
   };
 
-  mapListeners( map:mapboxgl.Map ){
+  mapListeners(map: mapboxgl.Map) {
 
-    map.on('zoomend', (event) =>{
+    map.on('zoomend', (event) => {
       const newZoom = event.target.getZoom();
       this.zoom.set(newZoom);
     });
 
-    map.on('moveend', ()=>{
+    map.on('moveend', () => {
       const center = map.getCenter();
       this.coordinates.set(center);
     })
@@ -87,9 +89,9 @@ export default class FullscreenMapPageComponent implements AfterViewInit {
     //   console.log('Map loaded')
     // })
 
-    map.addControl( new mapboxgl.FullscreenControl() )
-    map.addControl( new mapboxgl.NavigationControl() )
-    map.addControl( new mapboxgl.ScaleControl() )
+    map.addControl(new mapboxgl.FullscreenControl())
+    map.addControl(new mapboxgl.NavigationControl())
+    map.addControl(new mapboxgl.ScaleControl())
 
     this.map.set(map);
   }

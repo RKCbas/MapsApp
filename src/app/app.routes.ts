@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: 'markers',
     title: 'Markers',
-    loadComponent: () => import('./pages/fullscreen-map-page/fullscreen-map-page.component')
+    loadComponent: () => import('./pages/markers-page/markers-page.component')
   },
   {
     path: 'houses',
