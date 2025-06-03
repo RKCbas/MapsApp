@@ -57,7 +57,7 @@ export default class FullscreenMapPageComponent implements AfterViewInit {
     await new Promise((resolve) => setTimeout(resolve, 80));
 
     const element = this.divElement()?.nativeElement;
-    console.log(element);
+    // console.log(element);
 
     const { lat, lng } = this.coordinates();
 
