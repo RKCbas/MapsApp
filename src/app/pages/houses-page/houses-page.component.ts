@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { v4 as uuid } from 'uuid';
 import { MiniMapComponent } from "../../maps/components/mini-map/mini-map.component";
 
-export interface HouseProperty {
+interface HouseProperty {
   id: string;
   name: string;
   description: string;

@@ -1,5 +1,4 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input, signal, viewChild } from '@angular/core';
-import { HouseProperty } from '../../../pages/houses-page/houses-page.component';
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import { environment } from '../../../../environments/environment';
 
